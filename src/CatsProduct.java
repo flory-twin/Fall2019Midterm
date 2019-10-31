@@ -46,6 +46,13 @@ public class CatsProduct {
 	public BigDecimal getPrice() {
 		return price;
 	}
+	
+	public String pretty() {
+		return name + "|" + category + "|" + description + "|" + price;
+		
+		
+		
+	}
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
@@ -57,11 +64,11 @@ public class CatsProduct {
 
 	}
 
-	//public static void main(String[] args) {
+	public static void main(String[] args) {
 
-//		CatsProduct cat1 = new CatsProduct("Murloc", "Tuxedo Cat", "Cute", new BigDecimal("100.00"));
-//		System.out.println(cat1);
+	CatsProduct cat1 = new CatsProduct("Murloc", "Tuxedo Cat", "Cute", new BigDecimal("100.00"));
+	System.out.println(cat1.pretty());
 
-//	}
+	}
 
 }
