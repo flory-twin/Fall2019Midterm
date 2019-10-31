@@ -22,7 +22,6 @@ public class FileIOHelper {
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
-
 			String line = br.readLine();
 			while (line != null) {
 				System.out.println(line);
