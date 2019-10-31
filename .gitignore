@@ -1,0 +1,20 @@
+# This .gitignore provided by Antonella Solomon, Grand Circus Java Bootcamp, Fall 2019.
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+*.class
+/bin
