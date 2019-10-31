@@ -56,8 +56,11 @@ public class CatsProduct {
 		return name + "," + category + "," + description + "," + price;
 
 	}
-
-	//public static void main(String[] args) {
+	
+	public static CatsProduct fromString(String csvRow) {
+	   String[] csvMembers = csvRow.split(",");
+	   return new CatsProduct(csvMembers[0], csvMembers[1], csvMembers[2], new BigDecimal(csvMembers[3]));
+	}
 
 //		CatsProduct cat1 = new CatsProduct("Murloc", "Tuxedo Cat", "Cute", new BigDecimal("100.00"));
 //		System.out.println(cat1);
