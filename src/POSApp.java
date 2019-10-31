@@ -6,6 +6,7 @@ public class POSApp {
 		
 		ArrayList<CatsProduct> catsList = new ArrayList<CatsProduct>(); 
 		
+		
 
 	}
 
