@@ -57,11 +57,11 @@ public class CatsProduct {
 
 	}
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 
-		CatsProduct cat1 = new CatsProduct("Murloc", "Tuxedo Cat", "Cute", new BigDecimal("100.00"));
-		System.out.println(cat1);
+//		CatsProduct cat1 = new CatsProduct("Murloc", "Tuxedo Cat", "Cute", new BigDecimal("100.00"));
+//		System.out.println(cat1);
 
-	}
+//	}
 
 }
