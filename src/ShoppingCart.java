@@ -216,15 +216,15 @@ public class ShoppingCart {
 		return inventory.get(userNum - 1).pretty();
 	}
 	public String getNameList() {
-		String rowFormatString = " n%d. %15s";
-		String headerFormatString = "   %15s";
+		String rowFormatString = " %2d. %-15s\n";
+		String headerFormatString = "    %-15s\n";
 		
 		String headers = String.format(
 				headerFormatString,  
 				"Cat Name");
 		String catRows = "";
 		
-		int ctr = 0;
+		int ctr = 1;
 		for (CatsProduct c : inventory) {
 			catRows += String.format(
 					rowFormatString,

@@ -36,7 +36,7 @@ public class POSApp {
 		Scanner scan = new Scanner(System.in);
 		int counter = 0;
 		int userNum = 0;
-		System.out.println("Welcome to our Cat'fe!")
+		System.out.println("Welcome to our Cat'fe!");
 		
 		ShoppingCart cart = new ShoppingCart();
 		cart.readCatsFromCSV("Cats.csv");
@@ -45,23 +45,13 @@ public class POSApp {
 			System.out.println("Please adopt as many cats as you like.");
 			System.out.println("Please note the associated adoption fee."); 
 			System.out.println("You may back-order multiple cloned versions of the cat(s) of your choice for the same fee.");
-			
-			userNum = Validator.getInt(scan, 
-					"Choose a number 1-12 to view from our fine selection of cats: ", 
-					1, 
-					adoptableCats.size());
-			
-			System.out.println(adoptableCats.get(userNum - 1).pretty());
-			
-			
-			
-			int catSelection = Validator.getInt(scan, 
-					"Which cat(s) would you like to adopt? Choose a cat 1-12", 
-					1, 
-					adoptableCats.size());
+
+			System.out.println(cart.getNameList());
+			System.out.println(cart.promptForCatDetails(scan)); 
 		
+			Validator.getString(scan, "Press any key to continue.");
 			
-		}
+		} while (true);
 		
 			
 	}
