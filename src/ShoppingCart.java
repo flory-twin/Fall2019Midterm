@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /*
- *    readFromCsv()
+ *    
       calculateSalesTax()
       calculateSubTotal()
       calculateGrandTotal()
-      addItemToCart()
+      
       removeItemFromCart()
       displayCart()
       > Rounding (Note)
@@ -89,6 +89,12 @@ public class ShoppingCart {
 		System.out.println(thisCartInstance.cart);
 		thisCartInstance.addItem(catTest);
 		System.out.println(thisCartInstance.cart);
+		thisCartInstance.removeItem(catTest);
+		System.out.println(thisCartInstance.cart);
+		thisCartInstance.removeItem(catTest);
+		System.out.println(thisCartInstance.cart);
+		thisCartInstance.removeItem(catTest);
+		System.out.println(thisCartInstance.cart);
 
 	}
 
@@ -133,25 +139,37 @@ public class ShoppingCart {
 		return subTotal;
 	}
 
-	public void removeItem (CatsProduct thingToDelete) {
-  		
-		cart.remove(thingToDelete);
-		
-	}
-	
-	public void addItem (CatsProduct thingToAdd) {
-		
-			if (cart.containsKey(thingToAdd)) {
-				int currentCount = cart.get(thingToAdd);
-				int newCount = currentCount + 1;
-				cart.put(thingToAdd, newCount);		
-			}
-			
-			else  { 
-				cart.put(thingToAdd, 1);
-			}
-  		
+	public void removeItem(CatsProduct thingToDelete) {
+		if (cart.containsKey(thingToDelete)) {
+			int currentCount = cart.get(thingToDelete);
+			int newCount = currentCount - 1;
+			if (newCount == 0) {
+				cart.remove(thingToDelete);
 
-  	}
+			} else {
+				cart.put(thingToDelete, newCount);
+
+			}
+		}
+
+		else {
+
+		}
+
+	}
+
+	public void addItem(CatsProduct thingToAdd) {
+
+		if (cart.containsKey(thingToAdd)) {
+			int currentCount = cart.get(thingToAdd);
+			int newCount = currentCount + 1;
+			cart.put(thingToAdd, newCount);
+		}
+
+		else {
+			cart.put(thingToAdd, 1);
+		}
+
+	}
 
 }

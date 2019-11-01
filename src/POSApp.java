@@ -59,8 +59,10 @@ public class POSApp {
 				adoptableCats.size());
 		
 		System.out.println(adoptableCats.get(userNum - 1).pretty());
-	}
 		
+		System.out.println("Would you like to adopt another cat? y/n");
+	}
+		 
 	private static List<CatsProduct> readCatsFromCSV(String fileName) {
 		ArrayList<CatsProduct> x = new ArrayList<CatsProduct>();
 
