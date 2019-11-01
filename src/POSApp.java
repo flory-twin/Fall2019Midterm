@@ -33,28 +33,28 @@ import java.util.Scanner;
 public class POSApp {
 
 	public static void main(String[] args) {
-	List<CatsProduct> adoptableCats = readCatsFromCSV("Cats.csv");
-	
+		
+		int counter = 0; 
+		
+		List<CatsProduct> adoptableCats = readCatsFromCSV("Cats.csv");
+
 		List<CatsProduct> a = new ArrayList<>();
-		Path pathToFile = Paths.get("Cats.csv");				
+		Path pathToFile = Paths.get("Cats.csv");
 		Scanner scnr = new Scanner(System.in);
-		ArrayList<CatsProduct> catsList = new ArrayList<CatsProduct>(12); 
+		ArrayList<CatsProduct> catsList = new ArrayList<CatsProduct>(12);
 		System.out.println("Welcome to our Cat'fe! Please adopt a cat.");
 		System.out.println("Choose a number 1-12 to view from our fine selection of cats.");
-		
+
 //		Set<String> catSet = new TreeSet<>();
 //		String userCon = "y"; 
 //		int userCategorySelect; 
-		
-		
-		
-		for(int i = 1; i <= 13; i++) {
-//			for (CatsProduct c : adoptableCats) {
-//		     
-//	        	System.out.println(c);
-	        
-		//	}
+
+		for (CatsProduct c : adoptableCats) {
+			counter += 1;
+			System.out.println(counter + ". " + c.getName());
+
 		}
+	}
 //		do {
 //			
 //			
@@ -65,13 +65,13 @@ public class POSApp {
 //		
 //		System.out.println("Thanks for adopting!");
 //		scnr.close();
+
 	
-	}
 
 	private static List<CatsProduct> readCatsFromCSV(String fileName) {
 		ArrayList<CatsProduct> x = new ArrayList<CatsProduct>();
-		
-		//Open the file for reading
+
+		// Open the file for reading
 		Path path = Paths.get("resources", fileName);
 
 		File file = path.toFile();
@@ -79,9 +79,9 @@ public class POSApp {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String line = br.readLine();
-			//One-at-a-time, read each line in the file.
+			// One-at-a-time, read each line in the file.
 			while (line != null) {
-				// For each line, 
+				// For each line,
 				// Create a CatsProduct from the line and
 				CatsProduct theCatOnThisLine = CatsProduct.fromString(line);
 				// Add it to the list.
@@ -97,9 +97,8 @@ public class POSApp {
 			System.out.println("Something went wrong when we tried to read the file.");
 
 		}
-		
-	 return (x);
-	 
+
+		return (x);
+
 	}
 }
-
