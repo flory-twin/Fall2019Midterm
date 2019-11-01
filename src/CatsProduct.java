@@ -48,7 +48,13 @@ public class CatsProduct {
 	}
 	
 	public String pretty() {
-		return name + "|" + category + "|" + description + "|" + price;
+		String FORMAT_STRING = " %-12s || %s\n";
+		String MONEY_FORMAT_STRING = "$%.2f";
+		return "============================================\n" +
+				String.format(FORMAT_STRING, "Cat Name", name) + 
+				String.format(FORMAT_STRING, "Category", category) + 
+				String.format(FORMAT_STRING, "Description", description) +
+				String.format(FORMAT_STRING, "Price", String.format(MONEY_FORMAT_STRING, price));
 		
 		
 		

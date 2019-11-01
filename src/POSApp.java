@@ -34,16 +34,14 @@ public class POSApp {
 
 	public static void main(String[] args) {
 		
-		int counter = 0; 
+		int counter = 0;
+		int userNum = 0;
 		
 		List<CatsProduct> adoptableCats = readCatsFromCSV("Cats.csv");
-
-		List<CatsProduct> a = new ArrayList<>();
+		
 		Path pathToFile = Paths.get("Cats.csv");
 		Scanner scnr = new Scanner(System.in);
-		ArrayList<CatsProduct> catsList = new ArrayList<CatsProduct>(12);
 		System.out.println("Welcome to our Cat'fe! Please adopt a cat.");
-		System.out.println("Choose a number 1-12 to view from our fine selection of cats.");
 
 //		Set<String> catSet = new TreeSet<>();
 //		String userCon = "y"; 
@@ -54,20 +52,15 @@ public class POSApp {
 			System.out.println(counter + ". " + c.getName());
 
 		}
+		
+		userNum = Validator.getInt(scnr, 
+				"Choose a number 1-12 to view from our fine selection of cats: ", 
+				1, 
+				adoptableCats.size());
+		
+		System.out.println(adoptableCats.get(userNum - 1).pretty());
 	}
-//		do {
-//			
-//			
-//			
-//			
-//		}
-//		 while (userCon.equalsIgnoreCase("y"));
-//		
-//		System.out.println("Thanks for adopting!");
-//		scnr.close();
-
-	
-
+		
 	private static List<CatsProduct> readCatsFromCSV(String fileName) {
 		ArrayList<CatsProduct> x = new ArrayList<CatsProduct>();
 
