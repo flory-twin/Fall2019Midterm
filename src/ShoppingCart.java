@@ -4,19 +4,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
-import com.sun.javafx.css.CalculatedValue;
 
 /*
  *    
-      calculateSalesTax()
-      calculateSubTotal()
-      calculateGrandTotal()
+   
+    
+    
       
       displayCart()
       > Rounding (Note)
@@ -191,4 +190,48 @@ public class ShoppingCart {
 		}
 	}
 
+	public String toString() {
+		String rowFormatString = "%15s %10s %100s $%.2f";
+		String headerFormatString = "%15s %10s %100s %6s";
+		
+		String headers = String.format(
+				headerFormatString,  
+				"Cat Name", "Cat Type", "Cat Description", "Adoption Fee");
+		String catRows = "";
+		for (CatsProduct c : inventory) {
+			catRows += String.format(
+					rowFormatString,
+					c.getName(), c.getCategory(), c.getDescription(), c.getPrice());
+		}
+		
+		return headers + catRows;
+	}
+	
+	public String promptForCatDetails(Scanner scan) {
+		int userNum = Validator.getInt(scan, 
+				"Choose a number 1-" + inventory.size() + " to view from our fine selection of cats: ", 
+				1, 
+				inventory.size());
+		
+		return inventory.get(userNum - 1).pretty();
+	}
+	public String getNameList() {
+		String rowFormatString = " n%d. %15s";
+		String headerFormatString = "   %15s";
+		
+		String headers = String.format(
+				headerFormatString,  
+				"Cat Name");
+		String catRows = "";
+		
+		int ctr = 0;
+		for (CatsProduct c : inventory) {
+			catRows += String.format(
+					rowFormatString,
+					ctr, c.getName());
+			ctr++;
+		}
+		
+		return headers + catRows;
+	}
 }

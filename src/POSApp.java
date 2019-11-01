@@ -33,67 +33,38 @@ import java.util.Scanner;
 public class POSApp {
 
 	public static void main(String[] args) {
-		
+		Scanner scan = new Scanner(System.in);
 		int counter = 0;
 		int userNum = 0;
+		System.out.println("Welcome to our Cat'fe!")
 		
-		List<CatsProduct> adoptableCats = readCatsFromCSV("Cats.csv");
+		ShoppingCart cart = new ShoppingCart();
+		cart.readCatsFromCSV("Cats.csv");
 		
-		Path pathToFile = Paths.get("Cats.csv");
-		Scanner scnr = new Scanner(System.in);
-		System.out.println("Welcome to our Cat'fe! Please adopt a cat.");
-
-//		Set<String> catSet = new TreeSet<>();
-//		String userCon = "y"; 
-//		int userCategorySelect; 
-
-		for (CatsProduct c : adoptableCats) {
-			counter += 1;
-			System.out.println(counter + ". " + c.getName());
-
+		do {
+			System.out.println("Please adopt as many cats as you like.");
+			System.out.println("Please note the associated adoption fee."); 
+			System.out.println("You may back-order multiple cloned versions of the cat(s) of your choice for the same fee.");
+			
+			userNum = Validator.getInt(scan, 
+					"Choose a number 1-12 to view from our fine selection of cats: ", 
+					1, 
+					adoptableCats.size());
+			
+			System.out.println(adoptableCats.get(userNum - 1).pretty());
+			
+			
+			
+			int catSelection = Validator.getInt(scan, 
+					"Which cat(s) would you like to adopt? Choose a cat 1-12", 
+					1, 
+					adoptableCats.size());
+		
+			
 		}
 		
-		userNum = Validator.getInt(scnr, 
-				"Choose a number 1-12 to view from our fine selection of cats: ", 
-				1, 
-				adoptableCats.size());
-		
-		System.out.println(adoptableCats.get(userNum - 1).pretty());
-		
-		System.out.println("Would you like to adopt another cat? y/n");
+			
 	}
 		 
-	private static List<CatsProduct> readCatsFromCSV(String fileName) {
-		ArrayList<CatsProduct> x = new ArrayList<CatsProduct>();
-
-		// Open the file for reading
-		Path path = Paths.get("resources", fileName);
-
-		File file = path.toFile();
-
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			String line = br.readLine();
-			// One-at-a-time, read each line in the file.
-			while (line != null) {
-				// For each line,
-				// Create a CatsProduct from the line and
-				CatsProduct theCatOnThisLine = CatsProduct.fromString(line);
-				// Add it to the list.
-				x.add(theCatOnThisLine);
-				// Now read a new line.
-				line = br.readLine();
-			}
-
-			br.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Something went wrong with the file.");
-		} catch (IOException e) {
-			System.out.println("Something went wrong when we tried to read the file.");
-
-		}
-
-		return (x);
-
-	}
+	
 }
