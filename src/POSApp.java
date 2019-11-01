@@ -48,8 +48,15 @@ public class POSApp {
 
 			System.out.println(cart.getNameList());
 			System.out.println(cart.promptForCatDetails(scan)); 
-		
+			
+			String userChoice = Validator.getStringMatchingRegex(scan, "Would you like to add this cat to your cart? (y/n): ", "[Yy]|[nN]");
+				if (userChoice.equalsIgnoreCase("y")) {
+					cart.addItem();
+				}
+			
 			Validator.getString(scan, "Press any key to continue.");
+			
+			
 			
 		} while (true);
 		
