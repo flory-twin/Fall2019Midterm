@@ -10,13 +10,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.sun.javafx.css.CalculatedValue;
+
 /*
  *    
       calculateSalesTax()
       calculateSubTotal()
       calculateGrandTotal()
       
-      removeItemFromCart()
       displayCart()
       > Rounding (Note)
       
@@ -83,19 +84,24 @@ public class ShoppingCart {
 		// Even if there isn't, (1) it will NEVER have moustaches and (2) it will ALWAYS
 		// be inside another method.
 		thisCartInstance.readCatsFromCSV("Cats.csv");
-		System.out.println(thisCartInstance.inventory);
+	//	System.out.println(thisCartInstance.inventory);
 		CatsProduct catTest = new CatsProduct("Russian Blue", "Voika", "Silvery-blue cat.", new BigDecimal(600));
 		thisCartInstance.addItem(catTest);
-		System.out.println(thisCartInstance.cart);
+//		System.out.println(thisCartInstance.cart);
 		thisCartInstance.addItem(catTest);
+		thisCartInstance.addItem(new CatsProduct("Persian", "Maluka", "Pure white with floof", new BigDecimal(300)));
 		System.out.println(thisCartInstance.cart);
-		thisCartInstance.removeItem(catTest);
-		System.out.println(thisCartInstance.cart);
-		thisCartInstance.removeItem(catTest);
-		System.out.println(thisCartInstance.cart);
-		thisCartInstance.removeItem(catTest);
-		System.out.println(thisCartInstance.cart);
-
+//		thisCartInstance.removeItem(catTest);
+//		System.out.println(thisCartInstance.cart);
+//		thisCartInstance.removeItem(catTest);
+//		System.out.println(thisCartInstance.cart);
+//		thisCartInstance.removeItem(catTest);
+//		System.out.println(thisCartInstance.cart);
+		BigDecimal subtotal = thisCartInstance.calcTotalBeforeTax();
+		System.out.println("Total before tax: " + subtotal);
+		System.out.println("Tax: " + thisCartInstance.calculateSalesTax(subtotal));
+		System.out.println("Total: " + thisCartInstance.calculateTotal());
+		
 	}
 
 	// This defines a prison cell; other people call it a "method definition."
@@ -133,11 +139,23 @@ public class ShoppingCart {
 		BigDecimal subTotal = new BigDecimal(0.0);
 
 		for (CatsProduct entry : cart.keySet()) {
-			System.out.println(entry + " = " + cart.get(entry));
+			//System.out.println(entry + " = " + cart.get(entry));
 			subTotal = subTotal.add((entry.getPrice().multiply(new BigDecimal(cart.get(entry)))));
 		}
 		return subTotal;
 	}
+	
+	public BigDecimal calculateSalesTax(BigDecimal subtotal) {
+	   return new BigDecimal(0.07).multiply(calcTotalBeforeTax());
+	}
+	
+	public BigDecimal calculateTotal()
+	{
+	   BigDecimal totalBeforeTax = calcTotalBeforeTax();
+	   return (totalBeforeTax.add(
+	         calculateSalesTax(totalBeforeTax)));
+	}
+	
 
 	public void removeItem(CatsProduct thingToDelete) {
 		if (cart.containsKey(thingToDelete)) {
@@ -157,6 +175,8 @@ public class ShoppingCart {
 		}
 
 	}
+	
+	
 
 	public void addItem(CatsProduct thingToAdd) {
 
@@ -169,7 +189,6 @@ public class ShoppingCart {
 		else {
 			cart.put(thingToAdd, 1);
 		}
-
 	}
 
 }
