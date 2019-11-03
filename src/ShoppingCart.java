@@ -191,8 +191,8 @@ public class ShoppingCart {
 	}
 
 	public String toString() {
-		String rowFormatString = "%-10s %-20s $%.2f";
-		String headerFormatString = "%-10s %-20s %6s";
+		String rowFormatString = "%-10s %-20s $%.2f\n";
+		String headerFormatString = "%-10s %-20s %6s\n";
 		
 		String headers = String.format(
 				headerFormatString,  
@@ -204,7 +204,7 @@ public class ShoppingCart {
 					c.getName(), c.getCategory(), c.getPrice());
 		}
 		
-		return headers + "\n" + catRows;
+		return headers + catRows;
 	}
 	
 	public CatsProduct promptForCat(Scanner scan) {

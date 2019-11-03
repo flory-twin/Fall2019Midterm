@@ -51,8 +51,10 @@ public class POSApp {
 			switch (userChoice) {
 			case 1:
 				viewCatListAndMaybeAddToCart(cart, scan);
+				break;
 			case 2:
-				System.out.println(cart);
+				viewCartAndMaybeCheckout(cart, scan);
+				break;
 			}
 
 		} while (true);
@@ -60,6 +62,7 @@ public class POSApp {
 	}
 
 	public static void viewCatListAndMaybeAddToCart(ShoppingCart cart, Scanner scan) {
+		System.out.println("==================================================");
 		System.out.println(cart.getNameList());
 		CatsProduct c = cart.promptForCat(scan);
 		System.out.println(c.pretty());
@@ -74,5 +77,12 @@ public class POSApp {
 
 		Validator.getString(scan, "Press any key to continue.");
 	}
-
+	
+	public static void viewCartAndMaybeCheckout(ShoppingCart cart, Scanner scan) {
+		System.out.println("==================================================");
+		System.out.println(cart);
+		int userChoice = Validator.getInt(scan,
+				"1. Check out \n 2. Main menu \n 3. Quit ", 1,3);
+		
+	}
 }
