@@ -98,7 +98,7 @@ public class ShoppingCart {
 //		System.out.println(thisCartInstance.cart);
 		BigDecimal subtotal = thisCartInstance.calcTotalBeforeTax();
 		System.out.println("Total before tax: " + subtotal);
-		System.out.println("Tax: " + thisCartInstance.calculateSalesTax(subtotal));
+		System.out.println("Tax: " + thisCartInstance.calculateSalesTax());
 		System.out.println("Total: " + thisCartInstance.calculateTotal());
 		
 	}
@@ -144,7 +144,7 @@ public class ShoppingCart {
 		return subTotal;
 	}
 	
-	public BigDecimal calculateSalesTax(BigDecimal subtotal) {
+	public BigDecimal calculateSalesTax() {
 	   return new BigDecimal(0.07).multiply(calcTotalBeforeTax());
 	}
 	
@@ -152,7 +152,7 @@ public class ShoppingCart {
 	{
 	   BigDecimal totalBeforeTax = calcTotalBeforeTax();
 	   return (totalBeforeTax.add(
-	         calculateSalesTax(totalBeforeTax)));
+	         calculateSalesTax()));
 	}
 	
 

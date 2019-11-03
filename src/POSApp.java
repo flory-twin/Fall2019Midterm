@@ -36,6 +36,7 @@ public class POSApp {
 		Scanner scan = new Scanner(System.in);
 		int counter = 0;
 		int userNum = 0;
+		boolean quitChoice = false;
 		System.out.println("Welcome to our Cat'fe!");
 		System.out.println("Please adopt as many cats as you like.");
 		System.out.println("Please note the associated adoption fee.");
@@ -53,11 +54,14 @@ public class POSApp {
 				viewCatListAndMaybeAddToCart(cart, scan);
 				break;
 			case 2:
-				viewCartAndMaybeCheckout(cart, scan);
+				quitChoice = viewCartAndMaybeCheckout(cart, scan);
 				break;
+			case 3:
+			default:
+				quitChoice = true;	
 			}
 
-		} while (true);
+		} while (!quitChoice);
 
 	}
 
@@ -78,11 +82,28 @@ public class POSApp {
 		Validator.getString(scan, "Press any key to continue.");
 	}
 	
-	public static void viewCartAndMaybeCheckout(ShoppingCart cart, Scanner scan) {
+	public static boolean viewCartAndMaybeCheckout(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart);
 		int userChoice = Validator.getInt(scan,
-				"1. Check out \n 2. Main menu \n 3. Quit ", 1,3);
+				" 1. Check out \n 2. Main menu \n 3. Quit ", 1,3);
+		if (userChoice == 1) {
+			System.out.printf("Subtotal: %.2f\n", cart.calcTotalBeforeTax());
+			System.out.printf("Sales tax: %.2f\n", cart.calculateSalesTax());
+			System.out.printf("Grand total: %.2f\n ", cart.calculateTotal());
+			System.out.println("Thank you for you purchase! Cat-ch you later!");
+			return true;
+		}
+		else if (userChoice == 3) {
+			return true;
+		}
+		else if (userChoice == 2) {
+			return false;
+		}
+		else {
+			return false;
+		}
+
 		
 	}
 }
