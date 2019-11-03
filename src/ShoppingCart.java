@@ -191,30 +191,32 @@ public class ShoppingCart {
 	}
 
 	public String toString() {
-		String rowFormatString = "%15s %10s %100s $%.2f";
-		String headerFormatString = "%15s %10s %100s %6s";
+		String rowFormatString = "%-10s %-20s $%.2f";
+		String headerFormatString = "%-10s %-20s %6s";
 		
 		String headers = String.format(
 				headerFormatString,  
-				"Cat Name", "Cat Type", "Cat Description", "Adoption Fee");
+				"Cat Name", "Cat Type", "Adoption Fee");
 		String catRows = "";
-		for (CatsProduct c : inventory) {
+		for (CatsProduct c : cart.keySet()) {
 			catRows += String.format(
 					rowFormatString,
-					c.getName(), c.getCategory(), c.getDescription(), c.getPrice());
+					c.getName(), c.getCategory(), c.getPrice());
 		}
 		
-		return headers + catRows;
+		return headers + "\n" + catRows;
 	}
 	
-	public String promptForCatDetails(Scanner scan) {
+	public CatsProduct promptForCat(Scanner scan) {
 		int userNum = Validator.getInt(scan, 
 				"Choose a number 1-" + inventory.size() + " to view from our fine selection of cats: ", 
 				1, 
 				inventory.size());
 		
-		return inventory.get(userNum - 1).pretty();
+		return inventory.get(userNum - 1);
 	}
+	
+	
 	public String getNameList() {
 		String rowFormatString = " %2d. %-15s\n";
 		String headerFormatString = "    %-15s\n";
