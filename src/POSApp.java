@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -65,6 +66,21 @@ public class POSApp {
 
 	}
 
+	public static void paymentChoice (Scanner scan, BigDecimal money) {
+		int userPaymentChoice = Validator.getInt(scan,
+				" 1. Credit card \n 2. Check \n 3. Cash ", 1,3);
+		if (userPaymentChoice == 1 ) {
+			CreditCard.purchaseCreditCard(scan);
+		}
+		if (userPaymentChoice == 2 ) {
+			Check.purchaseCheck(scan);
+		}
+		else if (userPaymentChoice == 3 ) {
+			Cash.purchaseCash(scan, money);
+		}
+	}
+	
+	
 	public static void viewCatListAndMaybeAddToCart(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart.getNameList());
@@ -80,6 +96,9 @@ public class POSApp {
 		}
 
 		Validator.getString(scan, "Press any key to continue.");
+		
+		
+		
 	}
 	
 	public static boolean viewCartAndMaybeCheckout(ShoppingCart cart, Scanner scan) {
@@ -88,6 +107,7 @@ public class POSApp {
 		int userChoice = Validator.getInt(scan,
 				" 1. Check out \n 2. Main menu \n 3. Quit ", 1,3);
 		if (userChoice == 1) {
+			paymentChoice(scan, cart.calcTotalBeforeTax());
 			System.out.printf("Subtotal: %.2f\n", cart.calcTotalBeforeTax());
 			System.out.printf("Sales tax: %.2f\n", cart.calculateSalesTax());
 			System.out.printf("Grand total: %.2f\n ", cart.calculateTotal());

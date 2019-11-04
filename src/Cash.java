@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Cash extends Purchase {
 	
-	public static String purchaseCash(Scanner scan, BigDecimal money) {
+	public static String purchaseCash(Scanner scan, BigDecimal totalPaid) {
 		
 		
 		double userCash = Validator.getDouble(scan,
