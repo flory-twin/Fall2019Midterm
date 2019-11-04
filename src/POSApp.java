@@ -48,22 +48,6 @@ public class POSApp {
 
 	}
 
-	// This method aks the user for payment method and returns the payment
-	// information.
-	public static String paymentChoice(Scanner scan, BigDecimal money) {
-		System.out.println("How would you like to pay?");
-		int userPaymentChoice = Validator.getInt(scan, " 1. Credit card \n 2. Check \n 3. Cash ", 1, 3);
-		if (userPaymentChoice == 1) {
-			return CreditCard.purchaseCreditCard(scan);
-		} else if (userPaymentChoice == 2) {
-			return Check.purchaseCheck(scan);
-		} else {
-			return Cash.purchaseCash(scan, money);
-		}
-	}
-
-	// This method displays the list of cats and shows the details of a specific
-	// cat.
 	public static void listCats(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart.getNameList());
@@ -111,7 +95,7 @@ public class POSApp {
 	
 	// Prints the receipt and formats the details. 
 	public static void printReceipt(ShoppingCart cart, Scanner scan) {
-		String paymentInfo = paymentChoice(scan, cart.calcTotalBeforeTax());
+		String paymentInfo = Purchase.purchaseOptions(scan, cart.calcTotalBeforeTax());
 
 		System.out.println("==================================================");
 		System.out.println("YOUR RECEIPT:");
@@ -122,5 +106,6 @@ public class POSApp {
 		System.out.printf("Grand total: $%.2f\n ", cart.calculateTotal());
 		System.out.println(paymentInfo);
 		System.out.println("**Thank you for you purchase! Cat-ch you later!**");
+		
 	}
 }
