@@ -10,19 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
-/*
- *    
-   
-    
-    
-      
-      displayCart()
-      > Rounding (Note)
-      
-      -ArrayList of -potential- products (the inventory)
-      -HashMap<CatsProduct, int> (the actual cart) 
- */
 public class ShoppingCart {
 
 	private ArrayList<CatsProduct> inventory;
@@ -30,13 +17,13 @@ public class ShoppingCart {
 
 	public ShoppingCart() {
 		super();
-		// TODO Auto-generated constructor stub
+
 		inventory = new ArrayList<>();
 		cart = new HashMap<>();
 
 	}
 
-	// TODO Change back from public to private once testing is done
+
 	public void readCatsFromCSV(String fileName) {
 
 		// Open the file for reading
@@ -67,35 +54,19 @@ public class ShoppingCart {
 		}
 
 	}
-//   calculateSalesTax()
-//   calculateSubTotal()
-//   calculateGrandTotal()
-//   addItemToCart()
-//   removeItemFromCart()
-//   displayCart()
-
+	//Main method used for testing
 	public static void main(String[] args) {
 		ShoppingCart thisCartInstance = new ShoppingCart();
-		// This -uses- a prison cell.
-		// Other people call it a "method call" or "calling the method."
-		// There might be an equals in front (like int a = scan.nextInt();)
-		// That's a dead giveaway if it's there.
-		// Even if there isn't, (1) it will NEVER have moustaches and (2) it will ALWAYS
-		// be inside another method.
+
 		thisCartInstance.readCatsFromCSV("Cats.csv");
-	//	System.out.println(thisCartInstance.inventory);
+
 		CatsProduct catTest = new CatsProduct("Russian Blue", "Voika", "Silvery-blue cat.", new BigDecimal(600));
 		thisCartInstance.addItem(catTest);
-//		System.out.println(thisCartInstance.cart);
+
 		thisCartInstance.addItem(catTest);
 		thisCartInstance.addItem(new CatsProduct("Persian", "Maluka", "Pure white with floof", new BigDecimal(300)));
 		System.out.println(thisCartInstance.cart);
-//		thisCartInstance.removeItem(catTest);
-//		System.out.println(thisCartInstance.cart);
-//		thisCartInstance.removeItem(catTest);
-//		System.out.println(thisCartInstance.cart);
-//		thisCartInstance.removeItem(catTest);
-//		System.out.println(thisCartInstance.cart);
+
 		BigDecimal subtotal = thisCartInstance.calcTotalBeforeTax();
 		System.out.println("Total before tax: " + subtotal);
 		System.out.println("Tax: " + thisCartInstance.calculateSalesTax());
@@ -103,42 +74,13 @@ public class ShoppingCart {
 		
 	}
 
-	// This defines a prison cell; other people call it a "method definition."
-	// It's the only one which can have public, static, or BigDecimal directly in
-	// front of the name.
-	// It's also the only one with moustaches.
-	// It can NEVER occur inside another method.
+	
 	public BigDecimal calcTotalBeforeTax() {
-
-		// All the loops are jumprope/loop-de-loop.
-		// To extend the torture example...
-		// * The people holding the rope set the rules! They have two main types:
-		// * The -normal- for loop is a simple counting game;
-		// the people holding the rope make everyone who is tortured jump 250 or 500 or
-		// 20,000 before
-		// you can stop. I guess they do it with whips...it's like a rack in the prison
-		// cell.
-		// * The -normal- while loop is even ruder;
-		// you have to go until they're satisfied.
-		// They'll tell you what will satisfy them...but since
-		// we're putting different prisoners through the torture, different
-		// prisoners take different counts to do it.
-		// The torturers might play favorites and let some prisoners off light...
-		// * The ENHANCED for loop is still a simple counting game.
-		// However, the torturers are not yelling the number at you.
-		// Instead, they've got an array or a list or something, and they're
-		// going through it one by one, and yelling the array content at you.
-		// You'll still get out in a set number of jumps.
-		// This looks like:
-		// for (Thing nameForTheThing : aBunchOfThings) {
-		// yell (nameForTheThing);
-		// }
-		//
 
 		BigDecimal subTotal = new BigDecimal(0.0);
 
 		for (CatsProduct entry : cart.keySet()) {
-			//System.out.println(entry + " = " + cart.get(entry));
+
 			subTotal = subTotal.add((entry.getPrice().multiply(new BigDecimal(cart.get(entry)))));
 		}
 		return subTotal;
@@ -155,7 +97,6 @@ public class ShoppingCart {
 	         calculateSalesTax()));
 	}
 	
-
 	public void removeItem(CatsProduct thingToDelete) {
 		if (cart.containsKey(thingToDelete)) {
 			int currentCount = cart.get(thingToDelete);
@@ -190,6 +131,7 @@ public class ShoppingCart {
 		}
 	}
 
+	//Formats all the cats in the cart as a table 
 	public String toString() {
 		String rowFormatString = " %2d %-10s %-20s $%.2f\n";
 		String headerFormatString = "%3s %-10s %-20s %6s\n";
@@ -216,7 +158,7 @@ public class ShoppingCart {
 		return inventory.get(userNum - 1);
 	}
 	
-	
+	//Gets list of cat names from the inventory 
 	public String getNameList() {
 		String rowFormatString = " %2d. %-15s\n";
 		String headerFormatString = "    %-15s\n";
