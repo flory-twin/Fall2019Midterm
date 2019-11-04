@@ -18,9 +18,9 @@ public class Purchase {
 		case 1: 
 			return Cash.purchaseCash(scan, money);
 		case 2:
-			return Check.purchaseCheck(scan, money);
+			return Check.purchaseCheck(scan);
 		case 3:
-			return CreditCard.purchaseCreditCard(scan, money);
+			return CreditCard.purchaseCreditCard(scan);
 			
 		}
 		 

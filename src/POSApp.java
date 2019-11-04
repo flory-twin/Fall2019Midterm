@@ -38,6 +38,7 @@ public class POSApp {
 		int counter = 0;
 		int userNum = 0;
 		boolean quitChoice = false;
+
 		System.out.println("Welcome to our Cat'fe!");
 		System.out.println("Please adopt as many cats as you like.");
 		System.out.println("Please note the associated adoption fee.");
@@ -51,37 +52,36 @@ public class POSApp {
 			System.out.println("Please choose one of the following options (#):");
 			int userChoice = Validator.getInt(scan, " 1. View list of all cats.\n 2. View your kitty cart.\n 3. Quit.");
 			switch (userChoice) {
+
 			case 1:
 				viewCatListAndMaybeAddToCart(cart, scan);
 				break;
+
 			case 2:
 				quitChoice = viewCartAndMaybeCheckout(cart, scan);
 				break;
+
 			case 3:
 			default:
-				quitChoice = true;	
+				quitChoice = true;
 			}
 
 		} while (!quitChoice);
 
 	}
 
-	public static String paymentChoice (Scanner scan, BigDecimal money) {
+	public static String paymentChoice(Scanner scan, BigDecimal money) {
 		System.out.println("How would you like to pay?");
-		int userPaymentChoice = Validator.getInt(scan,
-				" 1. Credit card \n 2. Check \n 3. Cash ", 1,3);
-		if (userPaymentChoice == 1 ) {
+		int userPaymentChoice = Validator.getInt(scan, " 1. Credit card \n 2. Check \n 3. Cash ", 1, 3);
+		if (userPaymentChoice == 1) {
 			return CreditCard.purchaseCreditCard(scan);
-		}
-		else if (userPaymentChoice == 2 ) {
+		} else if (userPaymentChoice == 2) {
 			return Check.purchaseCheck(scan);
-		}
-		else{
+		} else {
 			return Cash.purchaseCash(scan, money);
 		}
 	}
-	
-	
+
 	public static void viewCatListAndMaybeAddToCart(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart.getNameList());
@@ -92,8 +92,7 @@ public class POSApp {
 				"Would you like to add this cat to your cart? (y/n): ", "[Yy]|[nN]");
 		if (userChoice.equalsIgnoreCase("y")) {
 			int howMany = Validator.getInt(scan, "How many?");
-			for (int i = 0; i < howMany; i++)
-			{
+			for (int i = 0; i < howMany; i++) {
 				cart.addItem(c);
 			}
 		} else if (userChoice.equalsIgnoreCase("n")) {
@@ -101,19 +100,16 @@ public class POSApp {
 		}
 
 		Validator.getString(scan, "Press any key to continue.");
-		
-		
-		
+
 	}
-	
+
 	public static boolean viewCartAndMaybeCheckout(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart);
-		int userChoice = Validator.getInt(scan,
-				" 1. Check out \n 2. Main menu \n 3. Quit ", 1,3);
+		int userChoice = Validator.getInt(scan, " 1. Check out \n 2. Main menu \n 3. Quit ", 1, 3);
 		if (userChoice == 1) {
 			String paymentInfo = paymentChoice(scan, cart.calcTotalBeforeTax());
-			
+
 			System.out.println("==================================================");
 			System.out.println("YOUR RECEIPT:");
 			System.out.println(cart);
@@ -121,19 +117,15 @@ public class POSApp {
 			System.out.printf("Sales tax: %.2f\n", cart.calculateSalesTax());
 			System.out.printf("Grand total: %.2f\n ", cart.calculateTotal());
 			System.out.println(paymentInfo);
-			System.out.println("Thank you for you purchase! Cat-ch you later!");
+			System.out.println("**Thank you for you purchase! Cat-ch you later!**");
 			return true;
-		}
-		else if (userChoice == 3) {
+		} else if (userChoice == 3) {
 			return true;
-		}
-		else if (userChoice == 2) {
+		} else if (userChoice == 2) {
 			return false;
-		}
-		else {
+		} else {
 			return false;
 		}
 
-		
 	}
 }
