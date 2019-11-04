@@ -66,17 +66,18 @@ public class POSApp {
 
 	}
 
-	public static void paymentChoice (Scanner scan, BigDecimal money) {
+	public static String paymentChoice (Scanner scan, BigDecimal money) {
+		System.out.println("How would you like to pay?");
 		int userPaymentChoice = Validator.getInt(scan,
 				" 1. Credit card \n 2. Check \n 3. Cash ", 1,3);
 		if (userPaymentChoice == 1 ) {
-			CreditCard.purchaseCreditCard(scan);
+			return CreditCard.purchaseCreditCard(scan);
 		}
-		if (userPaymentChoice == 2 ) {
-			Check.purchaseCheck(scan);
+		else if (userPaymentChoice == 2 ) {
+			return Check.purchaseCheck(scan);
 		}
-		else if (userPaymentChoice == 3 ) {
-			Cash.purchaseCash(scan, money);
+		else{
+			return Cash.purchaseCash(scan, money);
 		}
 	}
 	
@@ -111,10 +112,15 @@ public class POSApp {
 		int userChoice = Validator.getInt(scan,
 				" 1. Check out \n 2. Main menu \n 3. Quit ", 1,3);
 		if (userChoice == 1) {
-			paymentChoice(scan, cart.calcTotalBeforeTax());
+			String paymentInfo = paymentChoice(scan, cart.calcTotalBeforeTax());
+			
+			System.out.println("==================================================");
+			System.out.println("YOUR RECEIPT:");
+			System.out.println(cart);
 			System.out.printf("Subtotal: %.2f\n", cart.calcTotalBeforeTax());
 			System.out.printf("Sales tax: %.2f\n", cart.calculateSalesTax());
 			System.out.printf("Grand total: %.2f\n ", cart.calculateTotal());
+			System.out.println(paymentInfo);
 			System.out.println("Thank you for you purchase! Cat-ch you later!");
 			return true;
 		}

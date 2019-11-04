@@ -9,13 +9,7 @@ public class Cash extends Purchase {
 		double userCash = Validator.getDouble(scan,
 		"How much are you paying in cash?");
 		
-	
-		
-		
-		return null;
-		
-		
-		
+		return "Your change is: " + (totalPaid.subtract(new BigDecimal(userCash))); 
 	}
 
 }

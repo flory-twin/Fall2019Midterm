@@ -5,7 +5,7 @@ public class Check extends Purchase {
 
 	public static String purchaseCheck(Scanner scan) {
 
-		int userCash = Validator.getInt(scan, "What is your check number?");
-		return null;
+		int userCheck = Validator.getInt(scan, "What is your check number?");
+		return "Check number " + userCheck;
 	}
 }
