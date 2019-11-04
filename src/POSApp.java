@@ -90,7 +90,11 @@ public class POSApp {
 		String userChoice = Validator.getStringMatchingRegex(scan,
 				"Would you like to add this cat to your cart? (y/n): ", "[Yy]|[nN]");
 		if (userChoice.equalsIgnoreCase("y")) {
-			cart.addItem(c);
+			int howMany = Validator.getInt(scan, "How many?");
+			for (int i = 0; i < howMany; i++)
+			{
+				cart.addItem(c);
+			}
 		} else if (userChoice.equalsIgnoreCase("n")) {
 
 		}

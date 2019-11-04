@@ -191,17 +191,17 @@ public class ShoppingCart {
 	}
 
 	public String toString() {
-		String rowFormatString = "%-10s %-20s $%.2f\n";
-		String headerFormatString = "%-10s %-20s %6s\n";
+		String rowFormatString = " %2d %-10s %-20s $%.2f\n";
+		String headerFormatString = "%3s %-10s %-20s %6s\n";
 		
 		String headers = String.format(
 				headerFormatString,  
-				"Cat Name", "Cat Type", "Adoption Fee");
+				"No.", "Cat Name", "Cat Type", "Adoption Fee");
 		String catRows = "";
 		for (CatsProduct c : cart.keySet()) {
 			catRows += String.format(
 					rowFormatString,
-					c.getName(), c.getCategory(), c.getPrice());
+					cart.get(c), c.getName(), c.getCategory(), c.getPrice());
 		}
 		
 		return headers + catRows;
