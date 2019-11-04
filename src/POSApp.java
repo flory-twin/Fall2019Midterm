@@ -1,42 +1,17 @@
-
-/*
- * Present a menu to the user and let them choose an item (by number or letter).
-  - Allow the user to choose a quantity for the item ordered
-  - Give the user a line total.
-     Validator
-- Either through the menu or a separate question, allow them to re-display the menu and to complete the purchase.
-    Validator
-
-- GIve the subtotal, sales tax, and grand total.  
-     Methods 
-
-- Ask for payment type (cash, credit, check)
-   For cash, 
-   For check 
-   For credit, get the credit card number, expiration, and CVV.
-
-- At the end, display a receipt with all items ordered, the subtotal, the grand total, and appropriate payment information.
-
-- Return to the original menu for a new order.
- */
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Kevin Flory, Amber Dostert, Adam Graff
+ */
 public class POSApp {
-
+	/**
+	 * This main method shows the user the initial menu.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int counter = 0;
-		int userNum = 0;
 		boolean quitChoice = false;
 
 		System.out.println("Welcome to our Cat'fe!");
@@ -45,20 +20,23 @@ public class POSApp {
 		System.out
 				.println("You may back-order multiple cloned versions of the cat(s) of your choice for the same fee.");
 
+		// Imports a spreadsheet of inventory using the readCatsFromCSV.
 		ShoppingCart cart = new ShoppingCart();
 		cart.readCatsFromCSV("Cats.csv");
 
+		// While the user hasn't quit, while loop presents the choices for the next
+		// step.
 		do {
 			System.out.println("Please choose one of the following options (#):");
 			int userChoice = Validator.getInt(scan, " 1. View list of all cats.\n 2. View your kitty cart.\n 3. Quit.");
 			switch (userChoice) {
 
 			case 1:
-				viewCatListAndMaybeAddToCart(cart, scan);
+				listCats(cart, scan);
 				break;
 
 			case 2:
-				quitChoice = viewCartAndMaybeCheckout(cart, scan);
+				quitChoice = viewCart(cart, scan);
 				break;
 
 			case 3:
@@ -70,6 +48,8 @@ public class POSApp {
 
 	}
 
+	// This method aks the user for payment method and returns the payment
+	// information.
 	public static String paymentChoice(Scanner scan, BigDecimal money) {
 		System.out.println("How would you like to pay?");
 		int userPaymentChoice = Validator.getInt(scan, " 1. Credit card \n 2. Check \n 3. Cash ", 1, 3);
@@ -82,11 +62,18 @@ public class POSApp {
 		}
 	}
 
-	public static void viewCatListAndMaybeAddToCart(ShoppingCart cart, Scanner scan) {
+	// This method displays the list of cats and shows the details of a specific
+	// cat.
+	public static void listCats(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart.getNameList());
 		CatsProduct c = cart.promptForCat(scan);
 		System.out.println(c.pretty());
+		addCatToCart(cart, scan, c);
+	}
+
+	// This method adds the user selected cats to the shopping cart.
+	public static void addCatToCart(ShoppingCart cart, Scanner scan, CatsProduct c) {
 
 		String userChoice = Validator.getStringMatchingRegex(scan,
 				"Would you like to add this cat to your cart? (y/n): ", "[Yy]|[nN]");
@@ -103,22 +90,14 @@ public class POSApp {
 
 	}
 
-	public static boolean viewCartAndMaybeCheckout(ShoppingCart cart, Scanner scan) {
+	// Allows the user to view the cart and check out.
+	public static boolean viewCart(ShoppingCart cart, Scanner scan) {
 		System.out.println("==================================================");
 		System.out.println(cart);
 		int userChoice = Validator.getInt(scan, " 1. Check out \n 2. Main menu \n 3. Quit ", 1, 3);
 		if (userChoice == 1) {
-			String paymentInfo = paymentChoice(scan, cart.calcTotalBeforeTax());
 
-			System.out.println("==================================================");
-			System.out.println("YOUR RECEIPT:");
-			System.out.println(cart);
-			System.out.println("--------------------------------------------------");
-			System.out.printf("Subtotal: $%.2f\n", cart.calcTotalBeforeTax());
-			System.out.printf("Sales tax: $%.2f\n", cart.calculateSalesTax());
-			System.out.printf("Grand total: $%.2f\n ", cart.calculateTotal());
-			System.out.println(paymentInfo);
-			System.out.println("**Thank you for you purchase! Cat-ch you later!**");
+		printReceipt(cart, scan);	
 			return true;
 		} else if (userChoice == 3) {
 			return true;
@@ -128,5 +107,20 @@ public class POSApp {
 			return false;
 		}
 
+	}
+	
+	// Prints the receipt and formats the details. 
+	public static void printReceipt(ShoppingCart cart, Scanner scan) {
+		String paymentInfo = paymentChoice(scan, cart.calcTotalBeforeTax());
+
+		System.out.println("==================================================");
+		System.out.println("YOUR RECEIPT:");
+		System.out.println(cart);
+		System.out.println("--------------------------------------------------");
+		System.out.printf("Subtotal: $%.2f\n", cart.calcTotalBeforeTax());
+		System.out.printf("Sales tax: $%.2f\n", cart.calculateSalesTax());
+		System.out.printf("Grand total: $%.2f\n ", cart.calculateTotal());
+		System.out.println(paymentInfo);
+		System.out.println("**Thank you for you purchase! Cat-ch you later!**");
 	}
 }
