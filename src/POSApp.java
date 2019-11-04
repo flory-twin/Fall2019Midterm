@@ -113,9 +113,10 @@ public class POSApp {
 			System.out.println("==================================================");
 			System.out.println("YOUR RECEIPT:");
 			System.out.println(cart);
-			System.out.printf("Subtotal: %.2f\n", cart.calcTotalBeforeTax());
-			System.out.printf("Sales tax: %.2f\n", cart.calculateSalesTax());
-			System.out.printf("Grand total: %.2f\n ", cart.calculateTotal());
+			System.out.println("--------------------------------------------------");
+			System.out.printf("Subtotal: $%.2f\n", cart.calcTotalBeforeTax());
+			System.out.printf("Sales tax: $%.2f\n", cart.calculateSalesTax());
+			System.out.printf("Grand total: $%.2f\n ", cart.calculateTotal());
 			System.out.println(paymentInfo);
 			System.out.println("**Thank you for you purchase! Cat-ch you later!**");
 			return true;
