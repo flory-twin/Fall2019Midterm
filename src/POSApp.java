@@ -95,15 +95,15 @@ public class POSApp {
 	
 	// Prints the receipt and formats the details. 
 	public static void printReceipt(ShoppingCart cart, Scanner scan) {
-		String paymentInfo = Purchase.purchaseOptions(scan, cart.calcTotalBeforeTax());
+		String paymentInfo = Purchase.purchaseOptions(scan, cart.calculateTotal());
 
 		System.out.println("==================================================");
 		System.out.println("YOUR RECEIPT:");
 		System.out.println(cart);
 		System.out.println("--------------------------------------------------");
-		System.out.printf("Subtotal: $%.2f\n", cart.calcTotalBeforeTax());
-		System.out.printf("Sales tax: $%.2f\n", cart.calculateSalesTax());
-		System.out.printf("Grand total: $%.2f\n ", cart.calculateTotal());
+		System.out.printf("Subtotal:                           $%7.2f\n", cart.calcTotalBeforeTax());
+		System.out.printf("Sales tax:                          $%7.2f\n", cart.calculateSalesTax());
+		System.out.printf("Grand total:                        $%7.2f\n", cart.calculateTotal());
 		System.out.println(paymentInfo);
 		System.out.println("**Thank you for you purchase! Cat-ch you later!**");
 		

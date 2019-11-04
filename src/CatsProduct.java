@@ -11,6 +11,7 @@ public class CatsProduct {
 		super();
 	}
 
+	
 	public CatsProduct(String name, String category, String description, BigDecimal price) {
 		super();
 		this.name = name;
@@ -47,6 +48,8 @@ public class CatsProduct {
 		return price;
 	}
 	
+	
+	//Prints a single cat for details with formatted display
 	public String pretty() {
 		String FORMAT_STRING = " %-12s || %s\n";
 		String MONEY_FORMAT_STRING = "$%.2f";
@@ -64,6 +67,7 @@ public class CatsProduct {
 		this.price = price;
 	}
 
+	//Used to print to file 
 	@Override
 	public String toString() {
 		return name + "," + category + "," + description + "," + price;

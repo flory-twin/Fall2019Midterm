@@ -12,7 +12,7 @@ public abstract class Purchase {
 	
 	public static String  purchaseOptions(Scanner scan, BigDecimal money){
 		int userPaymentType = Validator.getInt(scan,
-				"How will you be paying today? \n 1 for Cash \n 2 for Check \n 3 for Credit Card", 1,3);
+				"How will you be paying today? \n 1. Cash \n 2. Check \n 3. Credit Card", 1,3);
 		
 		Purchase purchaseType;
 		switch(userPaymentType) {
